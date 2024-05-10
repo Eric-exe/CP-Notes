@@ -14,6 +14,19 @@ vector<int> sieve(int n) {
     }
     return res;
 }
+
+vector<bool> sieve(int n) {
+    vector<bool> isPrime(n, true);
+    isPrime[0] = isPrime[1] = false;
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (isPrime[i]) {
+            for (int j = i * 2; j <= n; j += i) isPrime[j] = false;
+        }
+    }
+    return isPrime;
+}
+
+vector<bool> primes = sieve(100);
 ```
 
 ### Prime Factorization
