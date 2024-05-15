@@ -19,9 +19,7 @@ The alternation pattern increases by a power of 2 each time.
 Note: We need to handle remainders of a cycle. 
 
 First, we count the number of numbers in our input (which is our current number $N+1$ ). Then, for each bit $i$, starting with 0 as the bit with the least significance, the formula for counting the $i$-th bit is:
-$$
-bitCount = \left\lfloor{\frac{N+1}{2^i}}\right\rfloor\cdot \frac{2^i}{2}+max(0, (N + 1) \; \bmod\; 2^i - \frac{2^i}{2} )
-$$
+$$bitCount = \left\lfloor{\frac{N+1}{2^i}}\right\rfloor\cdot \frac{2^i}{2}+max(0, (N + 1) \; \bmod\; 2^i - \frac{2^i}{2} )$$
 
 ### Code
 ```cpp

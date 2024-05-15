@@ -34,10 +34,6 @@ int C(int n, int r) {
 
 ### Intuition
 How many ways can I choose $r$ items from a selection of $n$ items?
-$$
-\binom{n}{r}\equiv\frac{n!}{r!(n-r)!}
-$$
+$$ \binom{n}{r}\equiv\frac{n!}{r!(n-r)!} $$
 What if there is an infinite selection of $n$ items? In the first scenario, once we picked an item, we can't pick it again. However, we can pick again in this case:
-$$
-\binom{n+r-1}{r}\equiv\frac{(n+r-1)!}{r!(n-r)!}
-$$
+$$ \binom{n+r-1}{r}\equiv\frac{(n+r-1)!}{r!(n-r)!} $$

@@ -6,9 +6,7 @@ Intuition:
 
 The median element in an array is the best element with value $x$ to choose such that the 
 
-$$
-\sum_{i=0}^{n-1}|arr[i]-x|
-$$
+$$ \sum_{i=0}^{n-1}|arr[i]-x| $$
 is minimized.
 
 ```

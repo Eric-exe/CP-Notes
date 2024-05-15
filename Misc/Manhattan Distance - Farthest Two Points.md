@@ -39,41 +39,17 @@ Time Complexity: $O(N)$
 Space Complexity: $O(1)$
 # Proof
 The max Manhattan Distance is 
-$$
-max(max(x_i+y_i) - min(x_j+y_j), max(x_i-y_i)-min(x_j-y_j))
-$$
+$$max(max(x_i+y_i) - min(x_j+y_j), max(x_i-y_i)-min(x_j-y_j))$$
 for all points $i$ and $j$ ($i$ can be equal to $j$).
 
 ---
 
 Manhattan Distance is $|x_i - x_j|+|y_i-y_j|$
-$$
-|x_i-x_j|+|y_i-y_j| = max
-\begin{cases}
-(x_i-x_j) + (y_i - y_j) & \\
-(x_i-x_j) + (y_j - y_i) & \\
-(x_j-x_i) + (y_i - y_j) & \\
-(x_j-x_i) + (y_j - y_i)
-\end{cases}
-$$
+$$|x_i-x_j|+|y_i-y_j| = max \begin{cases}(x_i-x_j) + (y_i - y_j) & \\ (x_i-x_j) + (y_j - y_i) & \\ (x_j-x_i) + (y_i - y_j) & \\  (x_j-x_i) + (y_j - y_i) \end{cases}$$
 Rewriting it as:
-$$
-|x_i-x_j|+|y_i-y_j| = max
-\begin{cases}
-(x_i+y_i) - (x_j+y_j) & \\
-(x_i-y_i) - (x_j-y_j) & \\
-(x_j-y_j) - (x_i-y_i) & \\
-(x_j+y_j) - (x_i+y_i)
-\end{cases}
-$$
+$$|x_i-x_j|+|y_i-y_j| = max \begin{cases} (x_i+y_i) - (x_j+y_j) & \\ (x_i-y_i) - (x_j-y_j) & \\ (x_j-y_j) - (x_i-y_i) & \\ (x_j+y_j) - (x_i+y_i) \end{cases}$$
 To maximize the Manhattan distance for all points, then:
-$$max(|x_i-x_j|+|y_i-y_j|) = max
-\begin{cases}
-max(x_i+y_i) - min(x_j+y_j) & \\
-max(x_i-y_i) - min(x_j-y_j) & \\
-max(x_j-y_j) - min(x_i-y_i) & \\
-max(x_j+y_j) - min(x_i+y_i)
-\end{cases}$$
+$$max(|x_i-x_j|+|y_i-y_j|) = max \begin{cases} max(x_i+y_i) - min(x_j+y_j) & \\ max(x_i-y_i) - min(x_j-y_j) & \\ max(x_j-y_j) - min(x_i-y_i) & \\ max(x_j+y_j) - min(x_i+y_i) \end{cases}$$
 for all points $i$ and $j$.
 
 ### Problems

@@ -10,9 +10,7 @@ In other words, the cycle decomposition of a permutation $\pi$ is the set of all
 ### A Problem
 What is the minimum number of swaps to get from $A$ to $B$?
 Calculate the smallest cycles of $\pi$. Then, the answer is
-$$
-\sum(c_k-1)
-$$
+$$\sum(c_k-1)$$
 where $c_1,c2,...,c_k$ are the cycles of the permutation. This is because a $k$-length cycle can always be created with $k-1$ transpositions. 
 
 ### Some Intuition
