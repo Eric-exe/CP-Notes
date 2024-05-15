@@ -1,5 +1,5 @@
 # Problem
-Find the max Manhattan distance given a array of points.
+Find the max Manhattan distance given an array of points.
 ```
 Input: points = [[3,10],[5,15],[10,2],[4,4]]
 Output: 18
@@ -13,43 +13,30 @@ Output: 18
 Input: points
 Return: {max_dist, point1, point2}
 */
-vector<int> getMaxDist(vector<vector<int>>& points) {
-	vector<int> sum = {INT_MIN, INT_MAX};
-	vector<int> sumIdx = {0, 0};
-	vector<int> diff = {INT_MIN, INT_MAX};
-	vector<int> diffIdx = {0, 0};
+vector<int> getMxDistance(int skip) {
+	vector<int> add = {INT_MIN, INT_MAX}, addIdx = {0, 0};
+	vector<int> sub = {INT_MIN, INT_MAX}, subIdx = {0, 0};
 
-	int n = points.size();
-	for (int i = 0; i < n; i++) {
-		int currSum = points[i][0] + points[i][1];
-		if (currSum > sum[0]) {
-			sum[0] = currSum;
-			sumIdx[0] = i;
-		}
-		if (currSum < sum[1]) {
-			sum[1] = currSum;
-			sumIdx[1] = i;
-		}
+	for (int i = 0; i < points.size(); i++) {
+		if (i == skip) continue;
 
-		int currDiff = points[i][0] - points[i][0];
-		if (currDiff > diff[0]) {
-			diff[0] = currDiff;
-			diffIdx[0] = i;
-		}
-		if (currDiff < diff[1]) {
-			diff[1] = currDiff;
-			diffIdx[1] = i;
-		}
+		int currAdd = points[i][0] + points[i][1];
+		if (currAdd > add[0]) { add[0] = currAdd; addIdx[0] = i; }
+		if (currAdd < add[1]) { add[1] = currAdd; addIdx[1] = i; }
+
+		int currSub = points[i][0] - points[i][1];
+		if (currSub > sub[0]) { sub[0] = currSub; subIdx[0] = i; }
+		if (currSub < sub[1]) { sub[1] = currSub; subIdx[1] = i; }
 	}
 
-	if (sum[0] - sum[1] > diff[0] - diff[1])
-		return {sum[0] - sum[1], sumIdx[0], sumIdx[1]};
-	return {diff[0] - diff[1], diffIdx[0], diffIdx[1]};
+	int addDiff = add[0] - add[1], subDiff = sub[0] - sub[1];
+	if (addDiff > subDiff) return {addDiff, addIdx[0], addIdx[1]};
+	return {subDiff, subIdx[0], subIdx[1]};
 }
 ```
 ### Analysis
 Time Complexity: $O(N)$
-Space Complexity: $O(N)$
+Space Complexity: $O(1)$
 # Proof
 The max Manhattan Distance is 
 $$
