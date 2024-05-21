@@ -26,6 +26,10 @@ Choose 101: dist(1) + dist(100) + dist(200) = 100 + 1 + 99
 1, 150, 250, 300
 Choose 150: dist(1) + dist(250) + dist(300) = 149 + 100 + 150 = 399
 Choose 250: dist(1) + dist(150) + dist(300) = 249 + 100 + 50 = 399
+
+1, 2, 1000, 2000
+Choose 2: dist(1) + dist(1000) + dist(2000) = 1 + 998 + 1998 = 2997
+Choose 1000: dist(1) + dist(2) + dist(2000) = 999 + 998 + 1000 = 2997
 ```
 Why not use mean?
 Mean can be impacted by outliers. For example
