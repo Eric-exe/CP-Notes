@@ -47,6 +47,21 @@ vector<int> toPrime(int n) {
 	return res;
 }
 ```
+
+### Normal Factorization (Not in Order)
+```cpp
+vector<int> factorize(int n) {
+    vector<int> factors;
+    for (int i = 1; i * i <= n; i++) {
+        if (n % i) continue;
+        factors.push_back(i);
+        if (i * i != n) factors.push_back(n / i);
+    }
+    return factors;
+}
+
+// TC: O(sqrtN)
+```
 ### Uses
 * grouping numbers by GCD
 	* prime factorize $\rightarrow$ union primes and map the current number to a prime
