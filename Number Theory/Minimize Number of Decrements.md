@@ -14,7 +14,7 @@ This is because we can decrement all of $left$ and we may still have $mx-left$ l
 
 #### Case 2
 The last element is smaller than the sum of the rest of the elements. That means we can decrement all of $mx$ and still have $left$ leftover. That means:
-$$ops = mx + \left \lfloor{\frac{left - mx}{2}}\right \rfloor + (left - mx) \% 2$$
+$$ops = mx + \left \lfloor{\frac{left - mx}{2}}\right \rfloor + (left - mx) \bmod 2$$
 or, if we have another variable $sum=mx+left$, then
-$$ops = \left \lfloor{\frac{sum}{2}}\right \rfloor + sum \% 2$$
+$$ops = \left \lfloor{\frac{sum}{2}}\right \rfloor + sum \bmod 2$$
 because we can pair everything. The only thing we need to check is the parity.

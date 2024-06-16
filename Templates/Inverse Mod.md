@@ -35,4 +35,4 @@ To get $a^{-1} \; (\bmod\; p)$, we can change Fermat's Little Theorem (with the 
 $$\frac{a^{p - 1}}{a} \equiv \frac{1}{a} (\bmod p)$$
 $$a^{p - 2}  \equiv a^{-1} (\bmod p)$$
 So, modular division is:
-$$\frac{b}{a} (\bmod p) \equiv b (\bmod p) \cdot a^{p-2} (\bmod p)$$
+$$\frac{b}{a} (\bmod p) \equiv (b (\bmod p) \cdot a^{p-2} (\bmod p)) \bmod p$$

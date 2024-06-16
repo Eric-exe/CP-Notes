@@ -18,7 +18,7 @@ long long invMod(long long b, long long a) {
 
 vector<long long> generateFactorial(int n) {
     vector<long long> factorial = {1};
-    for (int i = 1; i <= 20000; i++) factorial.push_back((factorial.back() * i) % MOD);
+    for (int i = 1; i <= FACT; i++) factorial.push_back((factorial.back() * i) % MOD);
     return factorial;
 }
 
