@@ -1,10 +1,12 @@
 ```cpp
 class UnionFind {
 public:
+    int components;
 	vector<int> parent;
 	vector<int> rank;
 	UnionFind(int n) {
 		rank.resize(n, 1);
+        components = n;
 		parent.resize(n);
 		for (int i = 0; i < n; i++) parent[i] = i;
 	}
@@ -18,6 +20,7 @@ public:
 		int iParent = getParent(i);
 		int jParent = getParent(j);
 		if (iParent == jParent) return false;
+        components--;
 		if (rank[iParent] >= rank[jParent]) {
 			rank[iParent] += rank[jParent];
 			parent[jParent] = iParent;
@@ -37,5 +40,5 @@ public:
 		return rank[getParent(i)];
 	}
 };
-```
+``````
 

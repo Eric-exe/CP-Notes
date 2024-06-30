@@ -41,3 +41,10 @@ $$\binom{n}{r}\equiv\frac{n!}{r!(n-r)!}$$
 ---
 What if there is an infinite selection of $n$ items? In the first scenario, once we picked an item, we can't pick it again. However, we can pick again in this case:
 $$\binom{n+r-1}{r-1}\equiv\frac{(n+r-1)!}{(r-1)!(n-(r-1))!}$$
+
+---
+
+### Combinatorics
+$$\sum_{x=1}^{n}\binom{n}{x} = 2^n-1$$
+#### Intuition
+How many ways can we choose $n$ items such that we pick at least 1 item. That is $\binom{n}{1} + \binom{n}{2} + ... + \binom{n}{n}$ as we have to take into account each way to choose $x$ items. However, if we look at it a different way and instead consider the choice at each item (choose/not choose), we have $2^n$ choices. However, this includes not choosing any item at all so we subtract 1.
