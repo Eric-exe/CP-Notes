@@ -1,7 +1,7 @@
 ```cpp
 class UnionFind {
 public:
-    int components;
+	int components;
 	vector<int> parent;
 	vector<int> rank;
 	UnionFind(int n) {
