@@ -13,3 +13,13 @@ $$\frac{n!}{r1!\cdot r2! \cdot r3! \cdot ... \cdot rk!}$$
 Example: How many ways can I rearrange 5 $x$ and 3 $y$? Keep in mind that switching an $x$ with another $x$ doesn't result in a new permutation.
 Solution:
 $$\frac{(5+3)!}{5!\cdot 3!}$$
+
+---
+### Inversions
+Inversions: pairs $i, j$ where $a[i] > a[j]$ but $i < j$.
+This value can be counted by using a merge sort.
+
+Fact:
+* The number of inversions is the minimum number of swaps needed to sort the permutation if we can only swap adjacent elements.
+* Swapping two elements in a permutation always changes the parity of the inversions in the permutation.
+	* Rough proof (write it out): $a < b < c$ has 0 inversions. But if we swap $a$ and $c$, ($c,a,b$), inversions between $a$ and $c$ adds/removes 0 or +2 per element. 0 is 

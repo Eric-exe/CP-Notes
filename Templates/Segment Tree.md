@@ -1,3 +1,56 @@
+### Array
+```cpp
+template<typename T> class SegTree {
+private:
+    ///////////////////////////////////////////////////
+    static constexpr T DEFAULT_VALUE = 0;
+    static constexpr T BAD = 0;
+    T f(T a, T b) {
+        return a + b;
+    }
+    ///////////////////////////////////////////////////
+    int n;
+    vector<T> tree;
+    
+    void build(int node, int l, int r, const vector<T>& v) {
+        if (l == r) { tree[node] = l < v.size() ? v[l] : DEFAULT_VALUE; return; }
+        int m = (l + r) / 2;
+        build(node * 2, l, m, v);
+        build(node * 2 + 1, m + 1, r, v);
+        tree[node] = f(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    void update(int node, int l, int r, int idx, T val) {
+        if (l == r) { tree[node] = val; return; }
+        int m = (l + r) / 2;
+        (idx <= m ? update(node * 2, l, m, idx, val) : update(node * 2 + 1, m + 1, r, idx, val));
+        tree[node] = f(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    T query(int node, int l, int r, int begin, int end) {
+        if (begin > r || end < l) return BAD;
+        if (begin <= l && r <= end) return tree[node];
+        int m = (l + r) / 2;
+        return f(query(node * 2, l, m, begin, end), query(node * 2 + 1, m + 1, r, begin, end));
+    }
+
+public:
+    SegTree(int n) : n(n), tree(4 * n, DEFAULT_VALUE) { build(1, 0, n - 1, {}); }
+    SegTree(const vector<T>& v) : SegTree(v.size()) { build(1, 0, n - 1, v); }
+    void update(int idx, T val) { update(1, 0, n - 1, idx, val); }
+    T query(int l, int r) { return query(1, 0, n - 1, l, r); }
+};
+```
+
+Usage
+```cpp
+// assume arr is vector<int>
+int n = arr.size();
+SegTree<int>* st1 = new SegTree<int>(n);
+SegTree<int>* st2 = new SegTree<int>(arr);
+```
+
+### Using Nodes (To Understand the Concept)
 ```cpp
 class SegTree {
 public:
@@ -13,6 +66,7 @@ public:
             int m = (l + r) / 2;
             lChild = new SegTree(l, m);
             rChild = new SegTree(m + 1, r);
+            mx = max(lChild->mx, rChild->mx);
         }
     }
 

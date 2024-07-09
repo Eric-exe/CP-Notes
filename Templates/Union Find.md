@@ -12,7 +12,7 @@ public:
 	}
 
 	int getParent(int i) {
-		if (parent[i] != i) return parent[i] = getParent(parent[i]);
+		if (parent[i] != i) return getParent(parent[i]);
 		return i;
 	}
 
