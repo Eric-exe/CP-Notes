@@ -20,7 +20,7 @@ public:
 		int iParent = getParent(i);
 		int jParent = getParent(j);
 		if (iParent == jParent) return false;
-        components--;
+		components--;
 		if (rank[iParent] >= rank[jParent]) {
 			rank[iParent] += rank[jParent];
 			parent[jParent] = iParent;
