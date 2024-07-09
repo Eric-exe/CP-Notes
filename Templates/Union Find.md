@@ -6,7 +6,7 @@ public:
 	vector<int> rank;
 	UnionFind(int n) {
 		rank.resize(n, 1);
-        components = n;
+		components = n;
 		parent.resize(n);
 		for (int i = 0; i < n; i++) parent[i] = i;
 	}
