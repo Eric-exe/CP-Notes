@@ -8,7 +8,7 @@ public:
     int n;
     vector<int> findPermutation(vector<int>& nums) {
         /*
-        cyclic graph h-> TSP
+        cyclic graph -> TSP
         */
         this->nums = nums;
         memset(dp, -1, sizeof(dp));

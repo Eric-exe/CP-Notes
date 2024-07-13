@@ -17,3 +17,5 @@ vector<int> factorize(int n) {
 
 // TC: O(sqrtN)
 ```
+
+Keeping a set of factors and traversing through them is $O(\sqrt{n})$.

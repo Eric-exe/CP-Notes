@@ -6,6 +6,12 @@ Use Tarjan's
 
 Tutorial: https://www.youtube.com/watch?v=wUgWX0nc4NY
 
+Tarjan's idea:
+* Use DFS to traverse through nodes. 
+	* Use stack to keep track of nodes currently visited and is possible to be part of the current SCC. 
+	* Use id to mark a node as visited. This is standard DFS behavior so that we don't actually traverse nodes that we've traversed before.
+	* If a node visits an already visited node, update the low value of the node to be the minimum low value of the current node and already visited node.
+
 ---
 
 CC's on undirected graphs
