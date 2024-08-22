@@ -2,10 +2,14 @@ Purpose: Similar to a set but we can access it like an array.
 
 ```cpp
 #include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 
 typedef tree<int,null_type,less<int>,rb_tree_tag,
 tree_order_statistics_node_update> indexed_set;
+
+typedef tree<int,null_type,less_equal<int>,rb_tree_tag,
+tree_order_statistics_node_update> indexed_multiset;
 ```
 
 ---
@@ -21,8 +25,10 @@ s.insert(9);
 Returns an iterator to the given element.
 Example:
 ```cpp
-auto it = s.find_by_order(7);
+auto it = s.find_by_order(3);
 cout << *it << endl; // 2
+it = s.find_by_order(7);
+cout << *it << endl; // 3
 ```
 Time Complexity: O($\log n$)
 #### `order_of_key(int)`

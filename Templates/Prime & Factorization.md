@@ -1,12 +1,12 @@
 ### Sieve of Eratosthenes
 ```cpp
 vector<int> sieve(int n) {
-    vector<bool> isPrime(n, true);
+    vector<bool> isPrime(n + 1, true);
     vector<int> res;
     isPrime[0] = isPrime[1] = false;
     for (int i = 2; i <= sqrt(n); i++) {
         if (isPrime[i]) {
-            for (int j = i * 2; j <= n; j += i) isPrime[j] = false;
+            for (int j = i * i; j <= n; j += i) isPrime[j] = false;
         }
     }
     for (int i = 0; i < n; i++) {
@@ -16,11 +16,11 @@ vector<int> sieve(int n) {
 }
 
 vector<bool> sieve(int n) {
-    vector<bool> isPrime(n, true);
+    vector<bool> isPrime(n + 1, true);
     isPrime[0] = isPrime[1] = false;
     for (int i = 2; i <= sqrt(n); i++) {
         if (isPrime[i]) {
-            for (int j = i * 2; j <= n; j += i) isPrime[j] = false;
+            for (int j = i * i; j <= n; j += i) isPrime[j] = false;
         }
     }
     return isPrime;
