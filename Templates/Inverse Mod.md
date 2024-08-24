@@ -23,15 +23,20 @@ Our goal is to solve for:
 $$\frac{b}{a} (\bmod p) $$
 #### Theorem
 This uses Fermat's Little Theorem which states that if $p$ is a prime number and $p \nmid a$, then
-$$a^{p-1}\equiv1(\bmod p)$$
-See: [Fermat's Little Theorem ← Number Theory (youtube.com)](https://www.youtube.com/watch?v=w0ZQvZLx2KA)
+$$a^p \equiv a(\bmod p)$$
+See: 
+* [Fermat's Little Theorem ← Number Theory (youtube.com)](https://www.youtube.com/watch?v=w0ZQvZLx2KA)
+* [Fermat's little theorem - Wikipedia](https://en.wikipedia.org/wiki/Fermat%27s_little_theorem)
+
 #### Modular Division
 We need to solve for 
 $$\frac{b}{a} (\bmod p)$$
 where $p$ is a big prime number and $a$ is a coprime of $p$. However, we can't just mod $b$ by $p$ and mod $a$ by $p$. To do this, instead, we rewrite the function:
 $$\frac{b}{a} (\bmod p) \equiv b (\bmod p) \cdot a^{-1} (\bmod p)$$
-To get $a^{-1} \; (\bmod\; p)$, we can change Fermat's Little Theorem (with the property of $a$ being a coprime of $p$) by dividing both sides by $a$:
-$$\frac{a^{p - 1}}{a} \equiv \frac{1}{a} (\bmod p)$$
-$$a^{p - 2}  \equiv a^{-1} (\bmod p)$$
+To get $a^{-1} \; (\bmod\; p)$, we can change Fermat's Little Theorem (with the property of $a$ being a coprime of $p$) by dividing both sides by $a^2$:
+$$\frac{a^p}{a^2} \equiv\frac{a}{a^2}(\bmod p)\rightarrow a^{p - 2}  \equiv a^{-1} (\bmod p)$$
+
 So, modular division is:
-$$\frac{b}{a} (\bmod p) \equiv (b (\bmod p) \cdot a^{p-2} (\bmod p)) \bmod p$$
+$$\frac{b}{a} (\bmod p) \equiv (b(\bmod p) \cdot a^{-1} (\bmod p))(\bmod p)$$
+or:
+$$(b (\bmod p) \cdot a^{p-2} (\bmod p)) (\bmod p)$$
