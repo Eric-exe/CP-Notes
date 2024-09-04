@@ -135,6 +135,7 @@ private:
         if (begin > r || end < l) return BAD;
         if (begin <= l && r <= end) return tree[node];
         int m = (l + r) / 2;
+        push(node, l, m, r);
         return f(query(node * 2, l, m, begin, end), query(node * 2 + 1, m + 1, r, begin, end));
     }
 
