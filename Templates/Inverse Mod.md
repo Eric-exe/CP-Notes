@@ -7,8 +7,8 @@ int MOD = 1e9+7;
 long long fastPow(long long base, long long exp) {
 	long long res = 1;
 	while (exp) {
-		if (exp % 2) res = (res * base) % MOD;
-		base = (base * base) % MOD;
+		if (exp % 2) res = (res * (base % MOD)) % MOD;
+		base = ((base % MOD) * (base % MOD)) % MOD;
 		exp /= 2;
 	}
 	return res;

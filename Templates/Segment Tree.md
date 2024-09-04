@@ -55,7 +55,7 @@ SegTree<int>* st2 = new SegTree<int>(arr);
 template<typename T> class SegTree {
 private:
     ///////////////////////////////////////////////////
-    static constexpr T DEFAULT_VALUE = 0;
+    static constexpr T DEFAULT_VALUE = 1e9;
     static constexpr T BAD = 0;
     T f(T a, T b) {
         return a + b;
@@ -65,6 +65,7 @@ private:
     vector<T> tree;
     vector<T> lazyAdd;
     vector<T> lazySet;
+    vector<bool> isLazySet;
     
     void build(int node, int l, int r, const vector<T>& v) {
         if (l == r) { tree[node] = l < v.size() ? v[l] : DEFAULT_VALUE; return; }
@@ -75,21 +76,23 @@ private:
     }
 
     void push(int node, int l, int m, int r) {
-        if (lazySet[node] != 0) {
+        if (isLazySet[node]) {
             lazySet[node * 2] = lazySet[node * 2 + 1] = lazySet[node];
+            isLazySet[node * 2] = isLazySet[node * 2 + 1] = true;
             tree[node * 2] = (m - l + 1) * lazySet[node];
             tree[node * 2 + 1] = (r - m) * lazySet[node];
             lazyAdd[node * 2] = lazyAdd[node * 2 + 1] = 0;
             lazySet[node] = 0;
+            isLazySet[node] = false;
         }
         else if (lazyAdd[node] != 0) {
-            if (lazySet[node * 2] == 0) lazyAdd[node * 2] += lazyAdd[node];
+            if (!isLazySet[node * 2]) lazyAdd[node * 2] += lazyAdd[node];
             else {
                 lazySet[node * 2] += lazyAdd[node];
                 lazyAdd[node * 2] = 0;
             }
 
-            if (lazySet[node * 2 + 1] == 0) lazyAdd[node * 2 + 1] += lazyAdd[node];
+            if (!isLazySet[node * 2 + 1]) lazyAdd[node * 2 + 1] += lazyAdd[node];
             else {
                 lazySet[node * 2 + 1] += lazyAdd[node];
                 lazyAdd[node * 2 + 1] = 0;
@@ -107,6 +110,7 @@ private:
             tree[node] = (r - l + 1) * val;
             lazyAdd[node] = 0;
             lazySet[node] = val;
+            isLazySet[node] = true;
             return;
         }
         int m = (l + r) / 2;
@@ -135,11 +139,12 @@ private:
         if (begin > r || end < l) return BAD;
         if (begin <= l && r <= end) return tree[node];
         int m = (l + r) / 2;
+        push(node, l, m, r);
         return f(query(node * 2, l, m, begin, end), query(node * 2 + 1, m + 1, r, begin, end));
     }
 
 public:
-    SegTree(int n) : n(n), tree(4 * n, DEFAULT_VALUE), lazyAdd(4 * n, 0), lazySet(4 * n, 0) { build(1, 0, n - 1, {}); }
+    SegTree(int n) : n(n), tree(4 * n, DEFAULT_VALUE), lazyAdd(4 * n, 0), lazySet(4 * n, 0), isLazySet(4 * n, false) { build(1, 0, n - 1, {}); }
     SegTree(const vector<T>& v) : SegTree(v.size()) { build(1, 0, n - 1, v); }
     void rangeSet(int l, int r, T val) { set(1, 0, n - 1, l, r, val); }
     void rangeAdd(int l, int r, T val) { add(1, 0, n - 1, l, r, val); }
