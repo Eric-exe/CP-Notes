@@ -35,13 +35,12 @@ Run sieve first
 vector<int> toPrime(int n) {
 	vector<int> res;
 	for (auto& p : primes) {
-		if (n % p == 0) {
-			while (n % p == 0) {
-				res.push_back(p);
-				n /= p;
-			}
+		if (p * p > n) break;
+		if (p > n) break;
+		while (n % p == 0) {
+			res.push_back(p);
+			n /= p;
 		}
-		else if (p > n) return res;
 	}
 	if (n != 1) res.push_back(n);
 	return res;

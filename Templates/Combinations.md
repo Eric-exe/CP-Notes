@@ -25,6 +25,7 @@ vector<long long> generateFactorial(int n) {
 vector<long long> factorial = generateFactorial(FACT);
 
 long long C(int n, int r) {
+	if (r < 0 || r > n) return 0;
     return invMod(factorial[n], (factorial[n - r] * factorial[r]) % MOD);
 }
 ```

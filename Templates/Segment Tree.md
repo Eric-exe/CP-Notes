@@ -1,4 +1,4 @@
-### Point Update Range Query
+## Point Update Range Query
 ```cpp
 template<typename T> class SegTree {
 private:
@@ -50,17 +50,16 @@ SegTree<int>* st1 = new SegTree<int>(n);
 SegTree<int>* st2 = new SegTree<int>(arr);
 ```
 
-### Range Update Range Query
+## Range Update Range Query
+### Range Sum
 ```cpp
-template<typename T> class SegTree {
+template<typename T> class SumSegTree {
 private:
     ///////////////////////////////////////////////////
-    static constexpr T DEFAULT_VALUE = 1e9;
+    static constexpr T DEFAULT_VALUE = 0;
     static constexpr T BAD = 0;
-    T f(T a, T b) {
-        return a + b;
-    }
     ///////////////////////////////////////////////////
+    
     int n;
     vector<T> tree;
     vector<T> lazyAdd;
@@ -72,7 +71,7 @@ private:
         int m = (l + r) / 2;
         build(node * 2, l, m, v);
         build(node * 2 + 1, m + 1, r, v);
-        tree[node] = f(tree[node * 2], tree[node * 2 + 1]);
+        tree[node] = tree[node * 2] + tree[node * 2 + 1];
     }
 
     void push(int node, int l, int m, int r) {
@@ -117,7 +116,7 @@ private:
         push(node, l, m, r);
         set(node * 2, l, m, a, b, val);
         set(node * 2 + 1, m + 1, r, a, b, val);
-        tree[node] = f(tree[node * 2], tree[node * 2 + 1]);
+        tree[node] = tree[node * 2] + tree[node * 2 + 1];
     }
 
     void add(int node, int l, int r, int a, int b, T val) {
@@ -132,7 +131,7 @@ private:
         push(node, l, m, r);
         add(node * 2, l, m, a, b, val);
         add(node * 2 + 1, m + 1, r, a, b, val);
-        tree[node] = f(tree[node * 2], tree[node * 2 + 1]);
+        tree[node] = tree[node * 2] + tree[node * 2 + 1];
     }
     
     T query(int node, int l, int r, int begin, int end) {
@@ -140,18 +139,226 @@ private:
         if (begin <= l && r <= end) return tree[node];
         int m = (l + r) / 2;
         push(node, l, m, r);
-        return f(query(node * 2, l, m, begin, end), query(node * 2 + 1, m + 1, r, begin, end));
+        return query(node * 2, l, m, begin, end) + query(node * 2 + 1, m + 1, r, begin, end);
     }
 
 public:
-    SegTree(int n) : n(n), tree(4 * n, DEFAULT_VALUE), lazyAdd(4 * n, 0), lazySet(4 * n, 0), isLazySet(4 * n, false) { build(1, 0, n - 1, {}); }
-    SegTree(const vector<T>& v) : SegTree(v.size()) { build(1, 0, n - 1, v); }
+    SumSegTree(int n) : n(n), tree(4 * n, DEFAULT_VALUE), lazyAdd(4 * n, 0), lazySet(4 * n, 0), isLazySet(4 * n, false) { build(1, 0, n - 1, {}); }
+    SumSegTree(const vector<T>& v) : SumSegTree(v.size()) { build(1, 0, n - 1, v); }
     void rangeSet(int l, int r, T val) { set(1, 0, n - 1, l, r, val); }
     void rangeAdd(int l, int r, T val) { add(1, 0, n - 1, l, r, val); }
     T query(int l, int r) { return query(1, 0, n - 1, l, r); }
 };
 ```
 
+### Range Max
+```cpp
+template<typename T> class MxSegTree {
+private:
+    ///////////////////////////////////////////////////
+    static constexpr T DEFAULT_VALUE = 0;
+    static constexpr T BAD = 0;  
+    ///////////////////////////////////////////////////
+    
+    int n;
+    vector<T> tree;
+    vector<T> lazyAdd;
+    vector<T> lazySet;
+    vector<bool> isLazySet;
+    
+    void build(int node, int l, int r, const vector<T>& v) {
+        if (l == r) {
+            tree[node] = l < v.size() ? v[l] : DEFAULT_VALUE;
+            return;
+        }
+        int m = (l + r) / 2;
+        build(node * 2, l, m, v);
+        build(node * 2 + 1, m + 1, r, v);
+        tree[node] = max(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    void push(int node, int l, int m, int r) {
+        if (isLazySet[node]) {
+            lazySet[node * 2] = lazySet[node * 2 + 1] = lazySet[node];
+            isLazySet[node * 2] = isLazySet[node * 2 + 1] = true;
+            tree[node * 2] = lazySet[node];       
+            tree[node * 2 + 1] = lazySet[node];  
+            lazyAdd[node * 2] = lazyAdd[node * 2 + 1] = 0;
+            lazySet[node] = 0;
+            isLazySet[node] = false;
+        }
+        else if (lazyAdd[node] != 0) {
+            if (!isLazySet[node * 2]) lazyAdd[node * 2] += lazyAdd[node];
+            else {
+                lazySet[node * 2] += lazyAdd[node];
+                lazyAdd[node * 2] = 0;
+            }
+            
+            if (!isLazySet[node * 2 + 1]) lazyAdd[node * 2 + 1] += lazyAdd[node];
+            else {
+                lazySet[node * 2 + 1] += lazyAdd[node];
+                lazyAdd[node * 2 + 1] = 0;
+            }
+            
+            tree[node * 2] += lazyAdd[node];   
+            tree[node * 2 + 1] += lazyAdd[node];
+            lazyAdd[node] = 0;
+        }
+    }
+    
+    void set(int node, int l, int r, int a, int b, T val) {
+        if (a > r || b < l) return;
+        if (a <= l && r <= b) {
+            tree[node] = val; 
+            lazyAdd[node] = 0;
+            lazySet[node] = val;
+            isLazySet[node] = true;
+            return;
+        }
+        int m = (l + r) / 2;
+        push(node, l, m, r);
+        set(node * 2, l, m, a, b, val);
+        set(node * 2 + 1, m + 1, r, a, b, val);
+        tree[node] = max(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    void add(int node, int l, int r, int a, int b, T val) {
+        if (a > r || b < l) return;
+        if (a <= l && r <= b) {
+            tree[node] += val;  
+            if (!isLazySet[node]) lazyAdd[node] += val;
+            else lazySet[node] += val;
+            return;
+        }
+        int m = (l + r) / 2;
+        push(node, l, m, r);
+        add(node * 2, l, m, a, b, val);
+        add(node * 2 + 1, m + 1, r, a, b, val);
+        tree[node] = max(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    T query(int node, int l, int r, int begin, int end) {
+        if (begin > r || end < l) return BAD;
+        if (begin <= l && r <= end) return tree[node];
+        int m = (l + r) / 2;
+        push(node, l, m, r);
+        return max(query(node * 2, l, m, begin, end), query(node * 2 + 1, m + 1, r, begin, end));
+    }
+
+public:
+    MxSegTree(int n) : n(n), tree(4 * n, DEFAULT_VALUE), lazyAdd(4 * n, 0), lazySet(4 * n, 0), isLazySet(4 * n, false) { build(1, 0, n - 1, {}); }
+    MxSegTree(const vector<T>& v) : MxSegTree(v.size()) { build(1, 0, n - 1, v); }
+    void rangeSet(int l, int r, T val) { set(1, 0, n - 1, l, r, val); }
+    void rangeAdd(int l, int r, T val) { add(1, 0, n - 1, l, r, val); }
+    T query(int l, int r) { return query(1, 0, n - 1, l, r); }
+};
+
+```
+
+### Range Min
+```cpp
+template<typename T> class MnSegTree {
+private:
+    ///////////////////////////////////////////////////
+    static constexpr T DEFAULT_VALUE = 0;
+    static constexpr T BAD = 1e9;  
+    ///////////////////////////////////////////////////
+    
+    int n;
+    vector<T> tree;
+    vector<T> lazyAdd;
+    vector<T> lazySet;
+    vector<bool> isLazySet;
+    
+    void build(int node, int l, int r, const vector<T>& v) {
+        if (l == r) {
+            tree[node] = l < v.size() ? v[l] : DEFAULT_VALUE;
+            return;
+        }
+        int m = (l + r) / 2;
+        build(node * 2, l, m, v);
+        build(node * 2 + 1, m + 1, r, v);
+        tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    void push(int node, int l, int m, int r) {
+        if (isLazySet[node]) {
+            lazySet[node * 2] = lazySet[node * 2 + 1] = lazySet[node];
+            isLazySet[node * 2] = isLazySet[node * 2 + 1] = true;
+            tree[node * 2] = lazySet[node];       
+            tree[node * 2 + 1] = lazySet[node];  
+            lazyAdd[node * 2] = lazyAdd[node * 2 + 1] = 0;
+            lazySet[node] = 0;
+            isLazySet[node] = false;
+        }
+        else if (lazyAdd[node] != 0) {
+            if (!isLazySet[node * 2]) lazyAdd[node * 2] += lazyAdd[node];
+            else {
+                lazySet[node * 2] += lazyAdd[node];
+                lazyAdd[node * 2] = 0;
+            }
+            
+            if (!isLazySet[node * 2 + 1]) lazyAdd[node * 2 + 1] += lazyAdd[node];
+            else {
+                lazySet[node * 2 + 1] += lazyAdd[node];
+                lazyAdd[node * 2 + 1] = 0;
+            }
+            
+            tree[node * 2] += lazyAdd[node];   
+            tree[node * 2 + 1] += lazyAdd[node];
+            lazyAdd[node] = 0;
+        }
+    }
+    
+    void set(int node, int l, int r, int a, int b, T val) {
+        if (a > r || b < l) return;
+        if (a <= l && r <= b) {
+            tree[node] = val; 
+            lazyAdd[node] = 0;
+            lazySet[node] = val;
+            isLazySet[node] = true;
+            return;
+        }
+        int m = (l + r) / 2;
+        push(node, l, m, r);
+        set(node * 2, l, m, a, b, val);
+        set(node * 2 + 1, m + 1, r, a, b, val);
+        tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    void add(int node, int l, int r, int a, int b, T val) {
+        if (a > r || b < l) return;
+        if (a <= l && r <= b) {
+            tree[node] += val;  
+            if (!isLazySet[node]) lazyAdd[node] += val;
+            else lazySet[node] += val;
+            return;
+        }
+        int m = (l + r) / 2;
+        push(node, l, m, r);
+        add(node * 2, l, m, a, b, val);
+        add(node * 2 + 1, m + 1, r, a, b, val);
+        tree[node] = min(tree[node * 2], tree[node * 2 + 1]);
+    }
+    
+    T query(int node, int l, int r, int begin, int end) {
+        if (begin > r || end < l) return BAD;
+        if (begin <= l && r <= end) return tree[node];
+        int m = (l + r) / 2;
+        push(node, l, m, r);
+        return min(query(node * 2, l, m, begin, end), query(node * 2 + 1, m + 1, r, begin, end));
+    }
+
+public:
+    MnSegTree(int n) : n(n), tree(4 * n, DEFAULT_VALUE), lazyAdd(4 * n, 0), lazySet(4 * n, 0), isLazySet(4 * n, false) { build(1, 0, n - 1, {}); }
+    MnSegTree(const vector<T>& v) : MnSegTree(v.size()) { build(1, 0, n - 1, v); }
+    void rangeSet(int l, int r, T val) { set(1, 0, n - 1, l, r, val); }
+    void rangeAdd(int l, int r, T val) { add(1, 0, n - 1, l, r, val); }
+    T query(int l, int r) { return query(1, 0, n - 1, l, r); }
+};
+```
+
+## Misc
 ### Using Nodes (To Understand the Concept)
 ```cpp
 class SegTree {

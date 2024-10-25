@@ -27,9 +27,9 @@ Returns an iterator to the given element.
 Example:
 ```cpp
 auto it = s.find_by_order(3);
-cout << *it << endl; // 2
-it = s.find_by_order(7);
-cout << *it << endl; // 3
+cout << *it << endl; // 9
+it = s.find_by_order(1);
+cout << *it << endl; // 3 
 ```
 Time Complexity: O($\log n$)
 ##### `order_of_key(int)`
