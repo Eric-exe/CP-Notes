@@ -30,14 +30,15 @@ auto it = s.find_by_order(3);
 cout << *it << endl; // 9
 it = s.find_by_order(1);
 cout << *it << endl; // 3 
+it = s.find_by_order(0);
+cout << *it << endl; // 2
 ```
 Time Complexity: O($\log n$)
 ##### `order_of_key(int)`
-Returns the index of the given element. If the element does not appear in the set, it returns the index of where it would have been
+Returns the index of the given element. If the element does not appear in the set, it returns the index of where it would have been.
 Example:
 ```cpp
 cout << s.order_of_key(7) << endl; // 2
-
 cout << s.order_of_key(6) << endl; // 2
 cout << s.order_of_key(8) << endl; // 3
 ```
