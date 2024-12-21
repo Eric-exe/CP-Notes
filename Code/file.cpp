@@ -1,10 +1,11 @@
+#pragma GCC optimize("O2")
 #include <bits/stdc++.h>
 using namespace std;
 
 typedef long long ll;
 
-int MOD = 1e9+7;
-double PI = 3.141592653589793238462643383279502884;
+const int MOD = 1e9+7;
+const double PI = 3.141592653589793238462643383279502884;
 
 #define fastio ios_base::sync_with_stdio(0); cin.tie(0);
 #define printAccurate(x, p) cout << fixed << setprecision(p) << x << endl
@@ -36,8 +37,10 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+
 void solve() {
-    
+
 }
 
 int main() {

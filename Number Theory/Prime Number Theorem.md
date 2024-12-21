@@ -1,0 +1,1 @@
+The number of primes up to $x$ is roughly $\frac{x}{ln(x)}$. In other words, of the first $n$ integers, approximately $\frac{1}{ln(n)}$ of them are prime.

@@ -20,7 +20,7 @@ long long invMod(long long b, long long a) {
 
 vector<long long> generateFactorial(int n) {
     vector<long long> factorial = {1};
-    for (int i = 1; i <= FACT; i++) factorial.push_back((factorial.back() * i) % MOD);
+    for (int i = 1; i <= n; i++) factorial.push_back((factorial.back() * i) % MOD);
     return factorial;
 }
 
@@ -31,6 +31,21 @@ int C(int n, int r) {
 }
 ```
 
+### Pascal's Triangle (For a lot of frequent, small combinations)
+```cpp
+vector<vector<ll>> pascals(int n, int mod) {
+    vector<vector<ll>> dp(n+1, vector<ll>(n+1, 0));
+    for (int i = 0; i <= n; i++) {
+        dp[i][0] = 1;
+        for (int j = 1; j <= i; j++) {
+            dp[i][j] = (dp[i-1][j-1] + dp[i-1][j]) % mod;
+        }
+    }
+    return dp;
+}
+// Returns a combination table C[n][r]
+```
+[Proof: Recursive Identity for Binomial Coefficients | Combinatorics](https://www.youtube.com/watch?v=PZ-3d7u_TU0)
 
 ### Intuition
 > Order doesn't matter

@@ -7,6 +7,8 @@ If $b$ is a permutation of $a$, then we can visualize it with a directed graph s
 
 In other words, the cycle decomposition of a permutation $\pi$ is the set of all cycles in $\pi$. 
 
+The sum of the cycles minus the number of cycles (or the summation of each cycle minus 1) is the minimum number of operations to sort the permutation.
+
 ### A Problem
 What is the minimum number of swaps to get from $A$ to $B$?
 Calculate the smallest cycles of $\pi$. Then, the answer is
