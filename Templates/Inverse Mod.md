@@ -22,7 +22,7 @@ long long invMod(long long b, long long a) {
 Our goal is to solve for:
 $$\frac{b}{a} (\bmod p) $$
 #### Theorem
-This uses Fermat's Little Theorem which states that if $p$ is a prime number and $p \nmid a$, then
+This uses Fermat's Little Theorem which states that if $p$ is a prime number and $p \nmid a$ (coprime of $a$), then
 $$a^p \equiv a(\bmod p)$$
 See: 
 * [Fermat's Little Theorem ← Number Theory (youtube.com)](https://www.youtube.com/watch?v=w0ZQvZLx2KA)

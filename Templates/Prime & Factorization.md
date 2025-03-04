@@ -46,6 +46,13 @@ vector<int> toPrime(int n) {
 	return res;
 }
 ```
+Time complexity: 
+$O(\pi(\sqrt{n}))+log(n))$
+$\pi(\sqrt(n))$ is the number of primes the algorithm traverses.
+$log(n$) is there for multiple of the same primes (eg $2^{30}$).
+
+Using the prime number theorem: $\pi(\sqrt{n})=\frac{\sqrt{n}}{log(\sqrt{n})}$
+So time complexity is really: $O(\frac{\sqrt{n}}{log(\sqrt{n})} + log(n))$
 
 ### Normal Factorization (Not in Order)
 ```cpp

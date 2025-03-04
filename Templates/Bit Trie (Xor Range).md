@@ -26,7 +26,7 @@ public:
         node->num = -1;
     }
 
-    int getMaxXor(int num) {
+    int mxXor(int num) {
         BitTrie* node = this;
         int res = -1;
         for (int i = BITS; i >= 0 && node; i--) {
@@ -38,7 +38,7 @@ public:
         return res;
     }
 
-    int getMinXor(int num) {
+    int mnXor(int num) {
         BitTrie* node = this;
         int res = -1;
         for (int i = BITS; i >= 0 && node; i--) {

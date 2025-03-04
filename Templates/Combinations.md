@@ -4,6 +4,7 @@ int FACT = 20000;
 
 long long fastPow(long long base, long long exp) {
 	long long res = 1;
+	base %= MOD;
 	while (exp) {
 		if (exp % 2) res = (res * base) % MOD;
 		base = (base * base) % MOD;
@@ -18,7 +19,7 @@ long long invMod(long long b, long long a) {
 
 vector<long long> generateFactorial(int n) {
     vector<long long> factorial = {1};
-    for (int i = 1; i <= FACT; i++) factorial.push_back((factorial.back() * i) % MOD);
+    for (int i = 1; i <= n; i++) factorial.push_back((factorial.back() * i) % MOD);
     return factorial;
 }
 
