@@ -22,7 +22,7 @@ long long invMod(long long b, long long a) {
 Our goal is to solve for:
 $$\frac{b}{a} (\bmod p) $$
 #### Theorem
-This uses Fermat's Little Theorem which states that if $p$ is a prime number and $p \nmid a$ (coprime of $a$), then
+This uses Fermat's Little Theorem which states that if $p$ is a prime number, then
 $$a^p \equiv a(\bmod p)$$
 See: 
 * [Fermat's Little Theorem ← Number Theory (youtube.com)](https://www.youtube.com/watch?v=w0ZQvZLx2KA)
@@ -31,9 +31,9 @@ See:
 #### Modular Division
 We need to solve for 
 $$\frac{b}{a} (\bmod p)$$
-where $p$ is a big prime number and $a$ is a coprime of $p$. However, we can't just mod $b$ by $p$ and mod $a$ by $p$. To do this, instead, we rewrite the function:
+where $p$ is a big prime number and p does not divide $a$ (since then $a(\bmod p)=0$) and we would be dividing by $0$. However, we can't just mod $b$ by $p$ and mod $a$ by $p$. To do this, instead, we rewrite the function:
 $$\frac{b}{a} (\bmod p) \equiv b (\bmod p) \cdot a^{-1} (\bmod p)$$
-To get $a^{-1} \; (\bmod\; p)$, we can change Fermat's Little Theorem (with the property of $a$ being a coprime of $p$) by dividing both sides by $a^2$:
+To get $a^{-1} \; (\bmod\; p)$, we can change Fermat's Little Theorem by dividing both sides by $a^2$:
 $$\frac{a^p}{a^2} \equiv\frac{a}{a^2}(\bmod p)\rightarrow a^{p - 2}  \equiv a^{-1} (\bmod p)$$
 
 So, modular division is:
