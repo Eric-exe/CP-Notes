@@ -67,3 +67,6 @@ How many ways can we choose $n$ items such that we pick at least 1 item. That is
 
 $$\binom{n}{2} = \frac{n(n - 1)}{2}$$
 To choose 2 items, we would need to pick the first item and then the second item. However, since order doesn't matter, picking $(a, b)$ is the same as picking $(b, a)$ so divide by 2.
+
+For 3 items:
+$$\binom{n}{3} = \frac{n(n - 1)(n-2)}{6}$$
