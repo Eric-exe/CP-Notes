@@ -48,7 +48,7 @@ vector<int> toPrime(int n) {
 ```
 Time complexity: 
 $O(\pi(\sqrt{n}))+log(n))$
-$\pi(\sqrt(n))$ is the number of primes the algorithm traverses.
+$\pi(\sqrt{n})$ is the number of primes the algorithm traverses.
 $log(n$) is there for multiple of the same primes (eg $2^{30}$).
 
 Using the prime number theorem: $\pi(\sqrt{n})=\frac{\sqrt{n}}{log(\sqrt{n})}$
