@@ -54,7 +54,7 @@ How many ways can I choose $r$ items from a selection of $n$ items?
 $$\binom{n}{r}\equiv\frac{n!}{r!(n-r)!}$$
 
 ---
-What if there is an infinite selection of $n$ items? In the first scenario, once we picked an item, we can't pick it again. However, we can pick again in this case:
+What if there is an infinite selection of $n$ items and we need to pick $r$ items? In the first scenario, once we picked an item, we can't pick it again. However, we can pick again in this case:
 $$\binom{n+r-1}{r-1}\equiv\frac{(n+r-1)!}{(r-1)!(n-(r-1))!}$$
 
 ---

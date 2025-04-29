@@ -46,14 +46,18 @@ vector<int> toPrime(int n) {
 	return res;
 }
 ```
-Time complexity: 
+#### Time complexity: 
 $O(\pi(\sqrt{n}))+log(n))$
 $\pi(\sqrt{n})$ is the number of primes the algorithm traverses.
-$log(n$) is there for multiple of the same primes (eg $2^{30}$).
+$log(n$) is there for multiple of the same primes (e.g. $2^{30}$).
 
 Using the prime number theorem: $\pi(\sqrt{n})=\frac{\sqrt{n}}{log(\sqrt{n})}$
-So time complexity is really: $O(\frac{\sqrt{n}}{log(\sqrt{n})} + log(n))$
+So time complexity is really: $O(\frac{\sqrt{n}}{log(\sqrt{n})} + log(n))$.
 
+#### Explanation of `p * p > n`:
+If $p\cdot p>n$, then all possible smaller prime factors of $n$ have already been removed. If $n > 1$ at this point, then $n$ must be prime, because any composite number would have a prime factor $\leq \sqrt{n}$, and we've already checked such primes. Therefore, we can safely stop the loop and, if needed, append $n$ as the last prime factor.
+
+This follows from the fact that there can b at most one prime factor greater than $\sqrt{n}$. If there were two such prime factors, say $p > \sqrt{n}$ and $q > \sqrt{n}$ $, then their product $pq > n$, which contradicts the assumption that both divide $n$, since their product would then have to divide $n$ as well.
 ### Normal Factorization (Not in Order)
 ```cpp
 vector<int> factorize(int n) {
