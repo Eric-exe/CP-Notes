@@ -4,6 +4,7 @@
 * $\gcd(a, b) \leq a$
 * $\gcd(a, b) \leq b$
 * $\gcd(a, b) \leq \min(a, b)$
+* $\gcd(a,b)\cdot \text{lcm}(a,b)=ab$ 
 
 ---
 ### Euclidean Algorithm

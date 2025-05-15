@@ -1,7 +1,7 @@
 ### Sieve of Eratosthenes
 ```cpp
 vector<int> sieve(int n) {
-    vector<bool> isPrime(n + 1, true);
+    vector<char> isPrime(n + 1, true);
     vector<int> res;
     isPrime[0] = isPrime[1] = false;
     for (int i = 2; i <= sqrt(n); i++) {
@@ -15,8 +15,8 @@ vector<int> sieve(int n) {
     return res;
 }
 
-vector<bool> sieve(int n) {
-    vector<bool> isPrime(n + 1, true);
+vector<char> sieve(int n) {
+    vector<char> isPrime(n + 1, true);
     isPrime[0] = isPrime[1] = false;
     for (int i = 2; i <= sqrt(n); i++) {
         if (isPrime[i]) {
@@ -26,9 +26,11 @@ vector<bool> sieve(int n) {
     return isPrime;
 }
 
-vector<bool> primes = sieve(100);
+vector<char> primes = sieve(100);
 ```
-
+Time complexity: $O(n\log(\log(n)))$
+#### Note
+* `vector<char>` is used instead of `vector<bool>` due to bit-packing. This means that multiple bools are packed into a byte which saves memory but complicates access. `vector<char>` doesn't do this so its more efficient in terms of speed to use `vector<char>`. This is also why `vector<bool>` doesn't actually store bools.
 ### Prime Factorization
 Run sieve first
 ```cpp

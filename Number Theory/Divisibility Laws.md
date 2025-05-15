@@ -1,0 +1,4 @@
+- If $a\mid b$, and $b \mid c$, then $a\mid c$
+- If $a \mid b$ and $a \mid c$, then $a \mid (b \pm c)$
+- If $a \mid bc$ and $\gcd(a, b) = 1$, then $a \mid c$
+- If $p$ is prime and $p \mid ab$, then $p \mid a$ or $p \mid b$

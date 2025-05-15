@@ -7,6 +7,11 @@ public:
     int num = -1;
     BitTrie() { child[0] = child[1] = NULL; };
 
+	~BitTrie() {
+		if (child[0]) delete child[0];
+		if (child[1]) delete child[1];
+	}
+
     void insert(int num) {
         BitTrie* node = this;
         for (int i = BITS; i >= 0; i--) {
