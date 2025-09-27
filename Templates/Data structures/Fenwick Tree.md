@@ -10,7 +10,7 @@ public:
     }
 
     void add(int idx, T val) {
-        for (++idx; idx <= n; idx += idx & -idx) {
+        for (++idx; idx <= n; idx += idx & (~idx + 1)) {
             bit[idx] += val;
             if (mod) bit[idx] %= mod;
         }
@@ -18,7 +18,7 @@ public:
 
     T query(int idx) {
         T res = 0;
-        for (++idx; idx > 0; idx -= idx & -idx) {
+        for (++idx; idx > 0; idx -= idx & (~idx + 1)) {
             res += bit[idx];
             if (mod) res %= mod;
         }
@@ -33,3 +33,5 @@ public:
     }
 };
 ```
+
+Time complexity is the same of a segment tree but actually has a much better constant time due to no recursion, and less operations per level.
