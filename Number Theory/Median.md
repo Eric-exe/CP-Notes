@@ -39,3 +39,22 @@ The mean wants to be super close to the big number meaning we need to do 3 * (bi
 
 The median wants to change the big number to 1 which takes (big number) ops.
 ```
+
+### Another Intuition
+Any value within the **median range** (i.e., between the lower and upper medians) is allowed.
+
+If I pick a value in this range and shift it slightly left or right (but still stay within the range), the total absolute difference (delta) doesn't change.
+
+Why? Because shifting by 1 unit:
+
+- Gains 1 unit of distance from each element on the left
+- But loses 1 unit of distance from each element on the right
+
+So the net change is zero. However, this balance only holds *within* the median range where we have equal number of elements to the left and right.
+
+If I move **outside** the range:
+
+- Shifting left adds distance without compensation (no elements on the right to cancel)
+- Shifting right does the same in the opposite direction
+
+So to minimize total distance, I must stay **within** the median range — that's why it's optimal.

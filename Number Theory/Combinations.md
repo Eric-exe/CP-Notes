@@ -1,3 +1,4 @@
+#sierpinski
 ### Code
 Supports calculating with modulus:
 ```cpp
@@ -46,12 +47,14 @@ vector<vector<ll>> pascals(int n, int mod) {
 // Returns a combination table C[n][r]
 ```
 [Proof: Recursive Identity for Binomial Coefficients | Combinatorics](https://www.youtube.com/watch?v=PZ-3d7u_TU0)
+#### Notes
+* Each value of Pascal's triangle, when modulo by 2, results in Sierpiński's triangle. Note that if we mod by a prime, the parity will break.
 
 ### Intuition
 > Order doesn't matter
 
 How many ways can I choose $r$ items from a selection of $n$ items?
-$$\binom{n}{r}\equiv\frac{n!}{r!(n-r)!}$$
+$$\binom{n}{r}\equiv\frac{n!}{r!(n-r)!}=\frac{n\cdot(n-1)\cdot(n-2) \dots (n-r+1)}{1\cdot2\cdot3\dots r}$$
 
 ---
 What if there is an infinite selection of $n$ items and we need to pick $r$ items? In the first scenario, once we picked an item, we can't pick it again. However, we can pick again in this case:

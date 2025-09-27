@@ -14,3 +14,5 @@ vector<int> zFunction(string s) {
 	return z;
 }
 ```
+Pass in the argument `s = string_to_find + '$' + string_to_match`
+Returns a vector of `int`s, with the values representing the longest matching prefix at the current position. 
